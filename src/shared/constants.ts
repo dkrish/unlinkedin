@@ -15,19 +15,20 @@ export const MAX_POST_LENGTH = 4000;
  * update the selectors here first — this is the only file that needs changing.
  */
 export const SELECTORS = {
-  // Feed post containers — LinkedIn uses data-urn for activity identifiers.
-  // If buttons stop appearing, open DevTools on the feed and run:
-  //   document.querySelectorAll('[data-urn]').length
-  //   document.querySelectorAll('.feed-shared-update-v2').length
-  // Use whichever returns a count matching visible posts.
-  POST_CONTAINER: '[data-urn], .feed-shared-update-v2',
-  // Primary post text — covers standard text posts
-  POST_TEXT_PRIMARY: '.feed-shared-update-v2__description, .feed-shared-text-view span[dir="ltr"]',
+  // Feed post containers — LinkedIn's current feed renders posts as direct div children
+  // of [data-testid="mainFeed"]. The old data-urn and BEM class selectors no longer match.
+  // If buttons stop appearing, open DevTools and run:
+  //   document.querySelectorAll('[data-testid="mainFeed"] > div').length
+  // Should return the number of visible feed posts.
+  POST_CONTAINER: '[data-testid="mainFeed"] > div',
+  // Primary post text — LinkedIn now uses data-testid="expandable-text-box"
+  POST_TEXT_PRIMARY: '[data-testid="expandable-text-box"]',
   // Fallback text for reshares and alternate formats
   POST_TEXT_FALLBACK: '.feed-shared-text, .attributed-text-segment-list__content',
-  // "...see more" expansion button
-  SEE_MORE_BUTTON: 'button.feed-shared-inline-show-more-text__button, button.see-more',
-  // Post action bar (likes, comments) — we insert our button above this
+  // "...see more" expansion button — LinkedIn now uses data-testid="expandable-text-button"
+  SEE_MORE_BUTTON: '[data-testid="expandable-text-button"]',
+  // Post action bar (likes, comments) — we insert our button above this.
+  // If not found, the button is appended to the post card instead.
   POST_ACTIONS_BAR: '.social-actions-bar, .feed-shared-social-action-bar, .feed-shared-footer',
 } as const;
 
