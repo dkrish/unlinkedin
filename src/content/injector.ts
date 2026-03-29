@@ -1,10 +1,10 @@
 import type { Settings, TranslateRequest, TranslateResponse } from '../shared/types';
-import { SELECTORS, INJECTED_ATTR } from '../shared/constants';
+import { SELECTORS, INJECTED_ATTR, DEFAULTS } from '../shared/constants';
 import { extractPostText } from './extractor';
 import { hashPost, getCached, setCached } from './cache';
 import { createTriggerButton, setButtonLoading, upsertCard } from './ui';
 
-let currentSettings: Settings;
+let currentSettings: Settings = DEFAULTS;
 
 export function setSettings(s: Settings): void {
   currentSettings = s;
@@ -116,9 +116,11 @@ export function injectPost(postEl: Element): void {
 
 function sendMessage(request: TranslateRequest): Promise<TranslateResponse> {
   return new Promise((resolve, reject) => {
-    chrome.runtime.sendMessage(request, (response: TranslateResponse) => {
+    chrome.runtime.sendMessage(request, (response: TranslateResponse | undefined) => {
       if (chrome.runtime.lastError) {
         reject(new Error(chrome.runtime.lastError.message));
+      } else if (!response) {
+        reject(new Error('No response from background worker'));
       } else {
         resolve(response);
       }

@@ -76,16 +76,29 @@ export function upsertCard(
     anchorEl.after(card);
   }
 
-  card.innerHTML = renderState(state, id);
+  card.innerHTML = renderState(state);
 
-  // Wire up retry button after innerHTML update
-  if (state.status === 'error') {
-    card.querySelector<HTMLButtonElement>('.ul-retry-btn')
-      ?.addEventListener('click', state.onRetry);
+  // Wire interactive elements after innerHTML update (avoids inline onclick handlers)
+  if (state.status === 'result' && Math.min(10, Math.max(1, Math.round(state.data.tone_score))) > 3) {
+    card.querySelector<HTMLButtonElement>('.ul-dismiss-btn')?.addEventListener('click', () => {
+      card!.style.display = 'none';
+    });
   }
+
+  if (state.status === 'error') {
+    card.querySelector<HTMLButtonElement>('.ul-retry-btn')?.addEventListener('click', state.onRetry);
+  }
+
+  // Wire openOptionsPage links
+  card.querySelectorAll<HTMLAnchorElement>('.ul-options-link').forEach((a) => {
+    a.addEventListener('click', (e) => {
+      e.preventDefault();
+      chrome.runtime.openOptionsPage();
+    });
+  });
 }
 
-function renderState(state: UIState, cardId: string): string {
+function renderState(state: UIState): string {
   switch (state.status) {
     case 'loading':
       return `
@@ -116,7 +129,7 @@ function renderState(state: UIState, cardId: string): string {
           <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
             <span style="font-size:11px;font-weight:600;color:${BRAND_COLOR};text-transform:uppercase;letter-spacing:0.06em;">What they really mean</span>
             <button
-              onclick="document.getElementById('${cardId}').style.display='none'"
+              class="ul-dismiss-btn"
               style="background:none;border:none;color:#9ca3af;cursor:pointer;font-size:18px;line-height:1;padding:0;font-family:inherit;"
               aria-label="Dismiss translation"
             >×</button>
@@ -132,15 +145,10 @@ function renderState(state: UIState, cardId: string): string {
     }
 
     case 'error':
-      return state.message === 'NO_API_KEY'
-        ? `<div style="padding:10px 14px;font-size:13px;color:#6b7280;">
-            No API key set.
-            <a href="#" onclick="chrome.runtime.openOptionsPage();return false;" style="color:${BRAND_COLOR};text-decoration:none;font-weight:500;">Open settings →</a>
-           </div>`
-        : `<div style="padding:10px 14px;font-size:13px;color:#dc2626;">
-            Translation failed.
-            <button class="ul-retry-btn" style="background:none;border:none;color:${BRAND_COLOR};cursor:pointer;text-decoration:underline;font-size:13px;font-family:inherit;padding:0;">Retry</button>
-           </div>`;
+      return `<div style="padding:10px 14px;font-size:13px;color:#dc2626;">
+        Translation failed.
+        <button class="ul-retry-btn" style="background:none;border:none;color:${BRAND_COLOR};cursor:pointer;text-decoration:underline;font-size:13px;font-family:inherit;padding:0;">Retry</button>
+       </div>`;
 
     case 'too_short':
       return `<div style="padding:10px 14px;font-size:13px;color:#9ca3af;font-style:italic;">Not enough corporate speak to work with.</div>`;
@@ -148,7 +156,7 @@ function renderState(state: UIState, cardId: string): string {
     case 'no_key':
       return `<div style="padding:10px 14px;font-size:13px;color:#6b7280;">
         Add an OpenRouter API key to get started.
-        <a href="#" onclick="chrome.runtime.openOptionsPage();return false;" style="color:${BRAND_COLOR};text-decoration:none;font-weight:500;">Open settings →</a>
+        <a href="#" class="ul-options-link" style="color:${BRAND_COLOR};text-decoration:none;font-weight:500;">Open settings →</a>
       </div>`;
   }
 }

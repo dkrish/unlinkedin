@@ -1,6 +1,7 @@
 import type { TranslateRequest, TranslateResponse, TranslationResult, Settings } from '../shared/types';
 import { SYSTEM_PROMPT, buildUserPrompt } from '../shared/prompts';
 import { MODEL, OPENROUTER_URL, MAX_OUTPUT_TOKENS } from '../shared/constants';
+import { fnv1a } from '../shared/hash';
 
 // Deduplicates concurrent requests for the same post hash
 const inFlight = new Map<string, Promise<TranslationResult>>();
@@ -115,12 +116,3 @@ export function parseTranslationResult(raw: string): TranslationResult {
   };
 }
 
-// FNV-1a 32-bit hash used as deduplication key for in-flight requests
-function fnv1a(str: string): string {
-  let h = 2166136261;
-  for (let i = 0; i < str.length; i++) {
-    h ^= str.charCodeAt(i);
-    h = Math.imul(h, 16777619) >>> 0;
-  }
-  return h.toString(16);
-}
