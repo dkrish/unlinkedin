@@ -7,7 +7,7 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "lib": ["ES2020", "DOM"],
-    "types": ["chrome"],
+    "types": ["chrome", "vitest/globals"],
     "skipLibCheck": true
   },
   "include": ["src/**/*", "vite.config*.ts", "vitest.config.ts"],
