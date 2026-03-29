@@ -7,7 +7,9 @@
     "dev": "concurrently \"vite build --watch\" \"vite build --watch --config vite.config.content.ts\" \"vite build --watch --config vite.config.bg.ts\"",
     "test": "vitest run",
     "test:watch": "vitest",
-    "icons": "node scripts/generate-icons.cjs"
+    "icons": "node scripts/generate-icons.cjs",
+    "postbuild": "cp manifest.json dist/ && cp -r icons dist/",
+    "postdev": "cp manifest.json dist/ && cp -r icons dist/"
   },
   "devDependencies": {
     "@types/chrome": "^0.0.268",
