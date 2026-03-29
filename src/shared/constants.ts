@@ -15,16 +15,20 @@ export const MAX_POST_LENGTH = 4000;
  * update the selectors here first — this is the only file that needs changing.
  */
 export const SELECTORS = {
-  // Primary feed post container — LinkedIn stamps data-id on each post
-  POST_CONTAINER: 'div[data-id]',
-  // Main post text area
-  POST_TEXT_PRIMARY: '.feed-shared-update-v2__description',
-  // Fallback text selector for reshares and alternate post formats
-  POST_TEXT_FALLBACK: '.feed-shared-text',
+  // Feed post containers — LinkedIn uses data-urn for activity identifiers.
+  // If buttons stop appearing, open DevTools on the feed and run:
+  //   document.querySelectorAll('[data-urn]').length
+  //   document.querySelectorAll('.feed-shared-update-v2').length
+  // Use whichever returns a count matching visible posts.
+  POST_CONTAINER: '[data-urn], .feed-shared-update-v2',
+  // Primary post text — covers standard text posts
+  POST_TEXT_PRIMARY: '.feed-shared-update-v2__description, .feed-shared-text-view span[dir="ltr"]',
+  // Fallback text for reshares and alternate formats
+  POST_TEXT_FALLBACK: '.feed-shared-text, .attributed-text-segment-list__content',
   // "...see more" expansion button
-  SEE_MORE_BUTTON: 'button.feed-shared-inline-show-more-text__button',
-  // Post action bar (likes, comments) — we insert above this
-  POST_ACTIONS_BAR: '.social-actions-bar, .feed-shared-social-action-bar',
+  SEE_MORE_BUTTON: 'button.feed-shared-inline-show-more-text__button, button.see-more',
+  // Post action bar (likes, comments) — we insert our button above this
+  POST_ACTIONS_BAR: '.social-actions-bar, .feed-shared-social-action-bar, .feed-shared-footer',
 } as const;
 
 export const DEFAULTS: Settings = {
