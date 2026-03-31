@@ -33,8 +33,8 @@ export const SELECTORS = {
 } as const;
 
 export const DEFAULTS: Settings = {
-  humorMode: 'funny',
-  translationStyle: 'honestly',
+  humorMode: 'savage-lite',
+  translationStyle: 'group-chat',
   outputLength: 'short',
 };
 
