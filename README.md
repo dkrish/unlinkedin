@@ -1,12 +1,12 @@
 # UnLinkedIn
 
-A Chrome extension that translates LinkedIn thought-leader posts into plain, honest, lightly funny English.
+A Chrome extension that does comedian commentary on LinkedIn thought-leader posts — calling out the gap between what they said and what they meant, with a light roast.
 
-**"I'm humbled and honored to announce…"** → **"I got promoted."**
+**"I'm humbled and honored to announce…"** → **"Just got promoted. Making it a whole thing."**
 
 ## How it works
 
-A small "✦ What they really mean" button appears below each LinkedIn feed post. Click it to get an LLM-powered plain-English translation via OpenRouter.
+A small "✦ What they really mean" button appears below each LinkedIn feed post. Click it and an LLM (via OpenRouter) riffs on the post: what they're really signaling, rewritten with some personality.
 
 ## Setup
 
@@ -43,8 +43,8 @@ After each rebuild, click the reload icon on `chrome://extensions`.
 
 | Setting | Options | Default |
 |---|---|---|
-| Humor Mode | Dry / Funny / Savage-lite | Funny |
-| Translation Style | Politely / Honestly / Group chat | Honestly |
+| Humor Mode | Dry / Funny / Savage-lite | Savage-lite |
+| Translation Style | Politely / Honestly / Group chat | Group chat |
 | Output Length | One-liner / Short rewrite / Full | Short rewrite |
 
 Access via the extension popup or `chrome://extensions` → Details → Extension options.
