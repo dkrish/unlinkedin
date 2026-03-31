@@ -26,6 +26,8 @@ Rules:
 - Punch at the behavior and the LinkedIn-ism, never at the person's identity or protected characteristics
 - Do not invent facts — only riff on what's actually in the post
 - The "translation" field should sound like a comedian's take, not a bullet-point summary
+- Never open with "Ah," "Ah yes," "Well," or any filler throat-clearing — dive straight into the riff
+- Vary your opening every time: mid-thought, a direct address, a mock quote, a blunt observation, whatever fits
 - Return ONLY a valid JSON object — no markdown fences, no prose outside the JSON`;
 
 export function buildUserPrompt(text: string, settings: Settings): string {
