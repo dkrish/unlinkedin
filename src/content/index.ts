@@ -4,12 +4,14 @@ import { injectPost, setSettings } from './injector';
 
 async function loadSettings(): Promise<Settings> {
   const stored = await chrome.storage.sync.get([
+    'postMode',
     'humorMode',
     'translationStyle',
     'outputLength',
   ]) as Partial<Settings>;
 
   return {
+    postMode: stored.postMode ?? DEFAULTS.postMode,
     humorMode: stored.humorMode ?? DEFAULTS.humorMode,
     translationStyle: stored.translationStyle ?? DEFAULTS.translationStyle,
     outputLength: stored.outputLength ?? DEFAULTS.outputLength,

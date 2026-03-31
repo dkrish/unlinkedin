@@ -1,8 +1,10 @@
+export type PostMode = 'roast' | 'tldr';
 export type HumorMode = 'dry' | 'funny' | 'savage-lite';
 export type TranslationStyle = 'politely' | 'honestly' | 'group-chat';
 export type OutputLength = 'one-liner' | 'short' | 'full';
 
 export interface Settings {
+  postMode: PostMode;
   humorMode: HumorMode;
   translationStyle: TranslationStyle;
   outputLength: OutputLength;

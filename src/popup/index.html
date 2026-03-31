@@ -48,20 +48,29 @@
       <p class="hint">Stored locally on this device only.</p>
     </div>
     <div class="field">
-      <label for="humor-mode">Humor Mode</label>
-      <select id="humor-mode">
-        <option value="dry">Dry</option>
-        <option value="funny" selected>Funny</option>
-        <option value="savage-lite">Savage-lite</option>
+      <label for="post-mode">Mode</label>
+      <select id="post-mode">
+        <option value="roast" selected>Roast — comedian commentary</option>
+        <option value="tldr">TLDR — plain summary</option>
       </select>
     </div>
-    <div class="field">
-      <label for="translation-style">Translation Style</label>
-      <select id="translation-style">
-        <option value="politely">Translate politely</option>
-        <option value="honestly" selected>Translate honestly</option>
-        <option value="group-chat">Translate like your group chat</option>
-      </select>
+    <div id="roast-settings">
+      <div class="field">
+        <label for="humor-mode">Humor Mode</label>
+        <select id="humor-mode">
+          <option value="dry">Dry</option>
+          <option value="funny">Funny</option>
+          <option value="savage-lite" selected>Savage-lite</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="translation-style">Translation Style</label>
+        <select id="translation-style">
+          <option value="politely">Translate politely</option>
+          <option value="honestly">Translate honestly</option>
+          <option value="group-chat" selected>Translate like your group chat</option>
+        </select>
+      </div>
     </div>
     <div class="field">
       <label for="output-length">Output Length</label>

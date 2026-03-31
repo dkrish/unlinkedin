@@ -44,7 +44,7 @@
 <body>
   <div class="container">
     <div class="header">
-      <div><h1>✦ UnLinkedIn</h1><p>Corporate-to-human translator</p></div>
+      <div><h1>✦ UnLinkedIn</h1><p>LinkedIn comedian commentary &amp; TLDR</p></div>
     </div>
     <form id="settings-form" novalidate>
       <div class="field">
@@ -53,27 +53,36 @@
         <p class="hint">Stored locally on this device only. Get one at openrouter.ai</p>
       </div>
       <div class="field">
-        <label for="humor-mode">Humor Mode</label>
-        <select id="humor-mode">
-          <option value="dry">Dry — deadpan and factual</option>
-          <option value="funny" selected>Funny — light cynicism, self-aware</option>
-          <option value="savage-lite">Savage-lite — sharp but not cruel</option>
+        <label for="post-mode">Mode</label>
+        <select id="post-mode">
+          <option value="roast" selected>Roast — comedian commentary on the post</option>
+          <option value="tldr">TLDR — plain, jargon-free summary</option>
         </select>
       </div>
-      <div class="field">
-        <label for="translation-style">Translation Style</label>
-        <select id="translation-style">
-          <option value="politely">Translate politely</option>
-          <option value="honestly" selected>Translate honestly</option>
-          <option value="group-chat">Translate like your group chat</option>
-        </select>
+      <div id="roast-settings">
+        <div class="field">
+          <label for="humor-mode">Humor Mode</label>
+          <select id="humor-mode">
+            <option value="dry">Dry — deadpan and resigned</option>
+            <option value="funny">Funny — playful, self-aware</option>
+            <option value="savage-lite" selected>Savage-lite — sharp, roasty, not cruel</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="translation-style">Translation Style</label>
+          <select id="translation-style">
+            <option value="politely">Politely — charitable but plain</option>
+            <option value="honestly">Honestly — say the quiet part loud</option>
+            <option value="group-chat" selected>Group chat — riff on it with friends</option>
+          </select>
+        </div>
       </div>
       <div class="field">
         <label for="output-length">Output Length</label>
         <select id="output-length">
           <option value="one-liner">One-liner</option>
-          <option value="short" selected>Short rewrite (2–4 sentences)</option>
-          <option value="full">Full translation</option>
+          <option value="short" selected>Short (2–4 sentences)</option>
+          <option value="full">Full</option>
         </select>
       </div>
       <div class="actions">

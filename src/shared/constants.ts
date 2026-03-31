@@ -33,6 +33,7 @@ export const SELECTORS = {
 } as const;
 
 export const DEFAULTS: Settings = {
+  postMode: 'roast',
   humorMode: 'savage-lite',
   translationStyle: 'group-chat',
   outputLength: 'short',

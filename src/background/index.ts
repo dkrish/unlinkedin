@@ -1,5 +1,5 @@
 import type { TranslateRequest, TranslateResponse, TranslationResult, Settings } from '../shared/types';
-import { SYSTEM_PROMPT, buildUserPrompt } from '../shared/prompts';
+import { getSystemPrompt, buildUserPrompt } from '../shared/prompts';
 import { MODEL, OPENROUTER_URL, MAX_OUTPUT_TOKENS } from '../shared/constants';
 import { fnv1a } from '../shared/hash';
 
@@ -63,7 +63,7 @@ async function callOpenRouter(text: string, settings: Settings): Promise<Transla
       model: MODEL,
       max_tokens: MAX_OUTPUT_TOKENS,
       messages: [
-        { role: 'system', content: SYSTEM_PROMPT },
+        { role: 'system', content: getSystemPrompt(settings) },
         { role: 'user', content: buildUserPrompt(text, settings) },
       ],
       response_format: { type: 'json_object' },
